@@ -1,12 +1,26 @@
+using System;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
+using UnityStandardAssets.Utility;
+using UnityEngine.EventSystems;
+using UnityStandardAssets.Characters.FirstPerson;
 
 namespace NewLean.Touch
 {
 	// This script allows you to tilt & pan the current GameObject (e.g. camera) by dragging your finger(s)
-	[ExecuteInEditMode]
-	public class LeanPitchYaw : MonoBehaviour
+	//[ExecuteInEditMode]
+    [RequireComponent(typeof(CharacterController))]
+    public class LeanPitchYaw : MonoBehaviour
 	{
-		[Tooltip("Ignore fingers with StartedOverGui?")]
+        [SerializeField]
+        private bool UseQuaternionRotation;
+
+        [SerializeField]
+        private MouseLook m_MouseLook;
+
+        public GameObject TouchedElement;
+
+        [Tooltip("Ignore fingers with StartedOverGui?")]
 		public bool IgnoreGuiFingers = true;
 
 		[Tooltip("Ignore fingers if the finger count doesn't match? (0 = any)")]
@@ -92,7 +106,25 @@ namespace NewLean.Touch
                 ExposeMyCapi();
                 firstUpdate = false;
             }
-            if (AutoTrackCurrentTarget)
+            if (!AutoTrackCurrentTarget)
+            {
+                if (CrossPlatformInputManager.GetAxis("Fire1") > 0.0f)
+                {
+                    if (ControlEnabled)
+                    {
+                        // Check to see if they're over a GUI element
+                        if (TouchedElement != null && TouchedElement.layer == 12)
+                        {
+                            //RotateView();
+                        }
+                        else
+                        {
+                            RotateView();
+                        }
+                    }
+                }
+            }
+            else
             {
                 AutoTrackTarget();
             }                         
@@ -134,12 +166,28 @@ namespace NewLean.Touch
 
 		}
 
- 
-        public GameObject TouchedElement;
+        private void RotateView()
+        {
+            if (UseQuaternionRotation)
+            {
+                m_MouseLook.LookRotation(transform, Camera.transform);
+            }
+            else
+            {
+                m_MouseLook.EulerRotation(transform);
+            }
+            //Lean.LeanTouch.RotateObject(transform, Lean.LeanTouch.DragDelta.y);
+        }
 
         public void OnFingerDown(NewLeanFinger finger)
         {
- 
+            //Old way but WhatTouched() needs a new definition
+            /*
+            if (finger.WhatTouched() != null)
+            {
+                TouchedElement = finger.WhatTouched();
+            }
+            */
         }
 
         public void OnFingerUp(NewLeanFinger finger)
@@ -148,9 +196,7 @@ namespace NewLean.Touch
             {
                 Capi.set("Camera.Rotation.x", this.transform.rotation.x);
                 Capi.set("Camera.Rotation.y", this.transform.parent.rotation.y);
-                Debug.Log("X:"+ transform.rotation.x + " Y:"+  transform.parent.rotation.y);
-                
-                
+                Debug.Log("X:"+ transform.rotation.x + " Y:"+  transform.parent.rotation.y);      
             }
         }
 
