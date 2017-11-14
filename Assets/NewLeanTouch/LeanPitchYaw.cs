@@ -1,12 +1,21 @@
+using System;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
+using UnityStandardAssets.Utility;
+using UnityEngine.EventSystems;
+using UnityStandardAssets.Characters.FirstPerson;
 
 namespace NewLean.Touch
 {
 	// This script allows you to tilt & pan the current GameObject (e.g. camera) by dragging your finger(s)
-	[ExecuteInEditMode]
-	public class LeanPitchYaw : MonoBehaviour
+	//[ExecuteInEditMode]
+    [RequireComponent(typeof(CharacterController))]
+    public class LeanPitchYaw : MonoBehaviour
 	{
-		[Tooltip("Ignore fingers with StartedOverGui?")]
+        
+        public GameObject TouchedElement;
+
+        [Tooltip("Ignore fingers with StartedOverGui?")]
 		public bool IgnoreGuiFingers = true;
 
 		[Tooltip("Ignore fingers if the finger count doesn't match? (0 = any)")]
@@ -85,19 +94,6 @@ namespace NewLean.Touch
             NewLeanTouch.OnFingerUp -= OnFingerUp;
         }
 
-        private void Update()
-        {
-            if (firstUpdate)
-            {
-                ExposeMyCapi();
-                firstUpdate = false;
-            }
-            if (AutoTrackCurrentTarget)
-            {
-                AutoTrackTarget();
-            }                         
-        }
-
         protected virtual void LateUpdate()
 		{
 			// Get the fingers we want to use
@@ -132,14 +128,56 @@ namespace NewLean.Touch
             //transform.localEulerAngles = new Vector3(transform.localEulerAngles.x + Pitch, 0.0f, 0.0f);
             //transform.parent.localEulerAngles = new Vector3(0.0f, transform.parent.localEulerAngles.y + Yaw, 0.0f);
 
-		}
+            if (firstUpdate)
+            {
+                ExposeMyCapi();
+                firstUpdate = false;
+            }
+            if (!AutoTrackCurrentTarget)
+            {
+                if (CrossPlatformInputManager.GetAxis("Fire1") > 0.0f)
+                {
+                    if (ControlEnabled)
+                    {
+                        // Check to see if they're over a GUI element
+                        if (TouchedElement != null && TouchedElement.layer == 12)
+                        {
+                            //RotateView();
+                        }
+                        else
+                        {
+                            RotateView();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                AutoTrackTarget();
+            }
 
- 
-        public GameObject TouchedElement;
+        }
+
+        private void RotateView()
+        {
+            transform.LookAt(TouchedElement.transform);
+        }
 
         public void OnFingerDown(NewLeanFinger finger)
         {
- 
+            Vector2 position = new Vector2(finger.ScreenPosition.x,finger.ScreenPosition.y);
+            
+            if (finger.WhatTouched(position) != null)
+            {
+                TouchedElement = finger.WhatTouched(position);
+                AutoTrackCurrentTarget = true;
+            }
+            else
+            {
+                AutoTrackCurrentTarget = false;
+                TouchedElement = null;
+            }
+            
         }
 
         public void OnFingerUp(NewLeanFinger finger)
@@ -148,9 +186,7 @@ namespace NewLean.Touch
             {
                 Capi.set("Camera.Rotation.x", this.transform.rotation.x);
                 Capi.set("Camera.Rotation.y", this.transform.parent.rotation.y);
-                Debug.Log("X:"+ transform.rotation.x + " Y:"+  transform.parent.rotation.y);
-                
-                
+                Debug.Log("X:"+ transform.rotation.x + " Y:"+  transform.parent.rotation.y);      
             }
         }
 
@@ -175,6 +211,10 @@ namespace NewLean.Touch
         {
             transform.LookAt(MySceneController.GetComponent<SceneController>()._selected.transform);
             transform.parent.LookAt(MySceneController.GetComponent<SceneController>()._selected.transform);
+
+            //Follow touched object
+            if(TouchedElement != null)
+                transform.LookAt(TouchedElement.transform);
 
             // Flatten our magic out
             transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0.0f, 0.0f);

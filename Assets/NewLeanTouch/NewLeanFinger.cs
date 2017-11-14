@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 namespace NewLean.Touch
@@ -42,8 +43,11 @@ namespace NewLean.Touch
 		// Used to store position snapshots, enable RecordFingers in NewLeanTouch to use this
 		public List<NewLeanSnapshot> Snapshots = new List<NewLeanSnapshot>(1000);
 
-		// This will return true if the current finger is currently touching the screen
-		public bool IsActive
+        // Used to find if the GUI is in use
+        private static List<RaycastResult> tempRaycastResults = new List<RaycastResult>();
+
+        // This will return true if the current finger is currently touching the screen
+        public bool IsActive
 		{
 			get
 			{
@@ -374,5 +378,23 @@ namespace NewLean.Touch
 			// Add to list
 			Snapshots.Add(snapshot);
 		}
-	}
+
+        public GameObject WhatTouched(Vector2 position)
+        {
+            //Nested for loops to increase area size for touch press
+            for (int xx = -5; xx <= 5; xx++)
+            {
+                for (int yy = -5; yy <= 5; yy++)
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(new Vector2(position.x+xx,position.y+yy));
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        return hit.transform.gameObject;
+                    }
+                }
+            }
+            return null;
+        }
+    }
 }
