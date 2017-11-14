@@ -220,7 +220,5 @@ namespace NewLean.Touch
             transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0.0f, 0.0f);
             transform.parent.localEulerAngles = new Vector3(0.0f, transform.parent.localEulerAngles.y, 0.0f);
         }
-
- 
     }
 }
