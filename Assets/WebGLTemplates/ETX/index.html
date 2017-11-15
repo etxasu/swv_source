@@ -3,23 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>%UNITY_WEB_NAME%</title>
+    <title>swv_source</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
-	<script src="TemplateData/ucapisupportfiles.js"> </script>
+  <script src="TemplateData/ucapisupportfiles.js"> </script>
     <link rel="stylesheet" href="TemplateData/style.css">
     <script src="TemplateData/UnityProgress.js"></script>  
-    <script src="%UNITY_WEBGL_LOADER_URL%"></script>
+    <!--NB: 11/13/2017-->
+    <script src="TemplateData/checkOrientation.js"> </script>
+    <script src="Build/UnityLoader.js"></script>
     <!--NB: 11/13/2017-->
     <!--Added script to confirm landscape orientation before loading game instance-->
+    <script>checkOrientation();</script>
     <script>
-      if(typeof window.orientation !== 'undefined' && window.orientation !=-90 && window.orientation != 90) {
-        if(confirm('Portrait orientation not supported. Please rotate screen to landscape mode and then click "OK".')) {
-          location.reload();
-        }
-      }
-    </script>
-    <script>
-      var gameInstance = UnityLoader.instantiate("gameContainer", "%UNITY_WEBGL_BUILD_URL%", {onProgress: UnityProgress});
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/nmbruce.github.io.json", {onProgress: UnityProgress});
     </script>
   </head>
   <body>
