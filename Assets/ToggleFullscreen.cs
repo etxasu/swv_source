@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -16,44 +17,11 @@ public class ToggleFullscreen : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+   
 	}
-
-	/*
-    void OnMouseDown(){
-
-		if (enableFull) {
-			Screen.SetResolution (Screen.width, Screen.height, true);
-			gameObject.GetComponent<Image> ().sprite = OffSprite;
-			enableFull = false;
-			Debug.Log ("FULLSCREEN ON");
-			DestroyImmediate (gameObject);
-		} else {
-			//Android
-			if (Application.platform == RuntimePlatform.Android) {
-				Application.Quit ();
-				gameObject.GetComponent<Image> ().sprite = OnSprite;
-				enableFull = true;
-				Debug.Log ("FULLSCREEN OFF");
-				DestroyImmediate (gameObject);
-
-
-
-
-			}
-			//Other 
-			else {
-				Screen.SetResolution (Screen.width, Screen.height, false);
-				gameObject.GetComponent<Image> ().sprite = OnSprite;
-				enableFull = true;
-				Debug.Log ("FULLSCREEN OFF");
-
-
-			}
-		}
-	}*/
-
+    
 	void FullOnClick(){
-		if (enableFull) {
+            if (enableFull) {
 			Screen.SetResolution (Screen.width, Screen.height, true);
 			gameObject.GetComponent<Image> ().sprite = OffSprite;
 			enableFull = false;
@@ -64,16 +32,15 @@ public class ToggleFullscreen : MonoBehaviour {
 				Application.Quit ();
 				gameObject.GetComponent<Image>().sprite = OnSprite;
 				enableFull = true;
-
-
 			}
 			//Other 
 			else {
 				Screen.SetResolution (Screen.width,Screen.height, false);
 				gameObject.GetComponent<Image>().sprite = OnSprite;
-				enableFull = true;
-
+				enableFull = true;				
 			}
 		}
+        
+        
 	}
 }
