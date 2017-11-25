@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /**
@@ -10,43 +10,47 @@ using UnityEngine;
 public class FullScreen : MonoBehaviour {
 
 	//Simple ENABLE FULLSCREEN MODE |ON|OFF|
-	private Rect fullPanel = new Rect((Screen.width - 300), (Screen.height - 60), 300, 300);
+	private Rect fullPanel = new Rect((Screen.width - 300), (Screen.height - 50)/10, 300, 80);
 
 	//User prompt to enable fullscreen in order to enhance game experience
-	private Rect promptPanel = new Rect((Screen.width - 600)/2, (Screen.height - 50)/2, 600, 50);
+	private Rect promptPanel = new Rect((Screen.width - 300)/2, (Screen.height - 50)/2, 300, 80);
 
 	//Boolean used to display prompt
 	private bool prompt = false;
+    
 	//Used to trigger full screen enabled.
 	private bool enableFull = false;
 
 	void OnGUI () 
 	{
-		if(prompt)
-			promptPanel = GUI.Window (0, promptPanel, promptWindow, "Gameplay Experience Enhanced when played in Fullscreen Mode.");
-		
-						
-		fullPanel = GUI.Window (0, fullPanel, panelWindow, "Fullscreen Mode: ");
+        //Restriction should be placed here. Not sure how to go about this I tried using Android argument and it does not show up on my phone(ANDROID) when I build it. 
+        if(Application.platform != RuntimePlatform.OSXPlayer || Application.platform != RuntimePlatform.IPhonePlayer){
+            if(prompt)
+                promptPanel = GUI.Window (0, promptPanel, promptWindow, "Fullscreen Mode Recommended.");
+            fullPanel = GUI.Window (1, fullPanel, panelWindow, "Fullscreen Mode: ");
+        }
+        
 	}
 		
 	// Panel Window
 	void panelWindow (int windowID)
 	{
-		float y = 20;
-	
+		float y = 20;	
 
-		if(GUI.Button(new Rect(5,y, fullPanel.width/2,  20), "ON"))
+		if(GUI.Button(new Rect(5,y, fullPanel.width/3,  50), "ON"))
 		{
 			//Set Fullscreen
-			Screen.SetResolution (Screen.currentResolution.width, Screen.currentResolution.height, true);
+			Screen.SetResolution (Screen.width, Screen.height, true);
 			enableFull = true;
 
 		}
 
-		if(GUI.Button(new Rect(5,y, fullPanel.width/2, 40), "OFF"))
+		if(GUI.Button(new Rect(180,y, fullPanel.width/3, 50), "OFF"))
 		{
-			//User selects no, make the prompt go away.
 			enableFull = false;
+            Application.Quit();
+            Screen.SetResolution (Screen.width, Screen.height, false);
+
 		}
 	}
 	// Prompt Window
@@ -54,8 +58,9 @@ public class FullScreen : MonoBehaviour {
 	{
 		float y = 20;
 
-		if(GUI.Button(new Rect(5,y, promptPanel.width - 10, 20), "OK"))
+		if(GUI.Button(new Rect(promptPanel.width/2-40,y, promptPanel.width/6, 50), "OK"))
 		{
+            //User selects ok, make the prompt go away.
 			prompt = false;
 		}
 
@@ -69,7 +74,7 @@ public class FullScreen : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(enableFull)
-			Screen.SetResolution (Screen.currentResolution.width, Screen.currentResolution.height, true);
+			Screen.SetResolution (Screen.width, Screen.height, true);
 	}
 
 }
