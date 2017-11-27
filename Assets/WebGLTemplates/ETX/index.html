@@ -15,7 +15,7 @@
     <!--Added script to confirm landscape orientation before loading game instance-->
     <script>checkOrientation();</script>
     <script>
-      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/nmbruce.github.io.json", {onProgress: UnityProgress});
+      var gameInstance = UnityLoader.instantiate("gameContainer", "%UNITY_WEBGL_BUILD_URL%", {onProgress: UnityProgress});
     </script>
   </head>
   <body>
