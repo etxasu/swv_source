@@ -23,10 +23,9 @@ public class FullScreen : MonoBehaviour {
 
 	void OnGUI () 
 	{
-        //Restriction should be placed here. Not sure how to go about this I tried using Android argument and it does not show up on my phone(ANDROID) when I build it.
 		//NB: 11/25/2017
-		//edited conditional to detect ios devices
-		if(Application.platform != RuntimePlatform.OSXPlayer || SystemInfo.operatingSystem.ToLower().Contains("ios")){
+		//edited conditional to detect ios devices and OSX devices
+		if(Application.platform != RuntimePlatform.OSXPlayer && !SystemInfo.operatingSystem.ToLower().Contains("ios")){
             if(prompt)
                 promptPanel = GUI.Window (0, promptPanel, promptWindow, "Fullscreen Mode Recommended.");
             fullPanel = GUI.Window (1, fullPanel, panelWindow, "Fullscreen Mode: ");
