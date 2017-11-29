@@ -15,6 +15,17 @@ public class FullScreenWidget : MonoBehaviour {
 
     private bool fullScreenOn = false;
 
+	//NB: 11/29/2017
+	//edited to remove button programatically
+	private void Update() {
+		if (SystemInfo.operatingSystem.ToLower().Contains("ios") || SystemInfo.operatingSystem.ToLower().Contains("mac")) {
+			Destroy(ImageComponent);
+		}
+		//Debug.Log ("Platform: " + Application.platform);
+		//Debug.Log ("OS: " + SystemInfo.operatingSystem);
+		//Debug.Log ("Method: Destroy(ImageComponent)");
+	}
+
     public IEnumerator TimeOutUserClicks()
     {
         gameObject.GetComponent<Button>().interactable = false;
