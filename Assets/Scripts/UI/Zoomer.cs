@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -11,6 +11,7 @@ public class Zoomer : MonoBehaviour
     public Transform MyOrbitalPaths;
     public Slider MyZoomSlider;
     public bool CustomCapiNames;
+    public GameObject NewLeanTouch;
 
     [SerializeField]
     private float MinTranslateIn;
@@ -78,7 +79,7 @@ public class Zoomer : MonoBehaviour
         }
     }
 
-    private float UpdateSSVCameraPosition(float _level)
+    public float UpdateSSVCameraPosition(float _level)
     {
         MyZoomSlider.value = _level;
 
@@ -162,5 +163,10 @@ public class Zoomer : MonoBehaviour
         {
             Capi.set("Camera."+ gameObject.name +".Zoom Level", MyZoomSlider.value);
         }
+    }
+
+    public float getZoomValue()
+    {
+        return MyZoomSlider.value;
     }
 }
