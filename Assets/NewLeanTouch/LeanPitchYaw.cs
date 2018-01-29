@@ -29,7 +29,7 @@ namespace NewLean.Touch
 		public float Pitch;
 
 		[Tooltip("The strength of the pitch changes with vertical finger movement")]
-		public float PitchSensitivity = -0.25f;
+		public float PitchSensitivity = -0.05f;
 
 		[Tooltip("Limit the pitch to min/max?")]
 		public bool PitchClamp = true;
@@ -45,7 +45,7 @@ namespace NewLean.Touch
 		public float Yaw;
 
 		[Tooltip("The strength of the yaw changes with horizontal finger movement")]
-		public float YawSensitivity = -0.25f;
+		public float YawSensitivity = -0.05f;
 
 		[Tooltip("Limit the yaw to min/max?")]
 		public bool YawClamp;
