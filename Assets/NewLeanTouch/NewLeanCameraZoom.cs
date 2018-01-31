@@ -29,10 +29,10 @@ namespace NewLean.Touch
 		public float Zoom = 50.0f;
 
 		[Tooltip("The minimum FOV/Size we want to zoom to")]
-		public float ZoomMin = .5f;
+		public float ZoomMin = 20.0f;
 
 		[Tooltip("The maximum FOV/Size we want to zoom to")]
-		public float ZoomMax = 15f;
+		public float ZoomMax = 960.0f;
 
         [Tooltip("The sensativity for mini map zoom")][Range(-1.0f, 1.0f)]
         public float MiniMapSensitivity = 1.0f;
@@ -98,7 +98,11 @@ namespace NewLean.Touch
 
                 if (pinchRatio != prevZoom)
                 {
-                    CloseUpCameraScript.distance = Mathf.Clamp(Zoom/80, CloseUpCameraScript.distanceMin, CloseUpCameraScript.distanceMax);
+                    //Calculate percentage of zoom
+					float ZoomPercent = (Zoom-ZoomMin)/(ZoomMax-ZoomMin);
+					float distanceMin = CloseUpCameraScript.distanceMin;
+					float distanceMax = CloseUpCameraScript.distanceMax;
+					CloseUpCameraScript.distance = Mathf.Clamp((ZoomPercent*(distanceMax-distanceMin)+distanceMin), distanceMin, distanceMax);
                     ZoomerScript.UpdateSSVCameraPosition(Zoom);
                 }
                 Zoom = ZoomerScript.getZoomValue();
