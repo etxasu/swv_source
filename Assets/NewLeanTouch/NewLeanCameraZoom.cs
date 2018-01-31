@@ -29,10 +29,10 @@ namespace NewLean.Touch
 		public float Zoom = 50.0f;
 
 		[Tooltip("The minimum FOV/Size we want to zoom to")]
-		public float ZoomMin = 20.0f;
+		public float ZoomMin = .5f;
 
 		[Tooltip("The maximum FOV/Size we want to zoom to")]
-		public float ZoomMax = 960.0f;
+		public float ZoomMax = 15f;
 
         [Tooltip("The sensativity for mini map zoom")][Range(-1.0f, 1.0f)]
         public float MiniMapSensitivity = 1.0f;
