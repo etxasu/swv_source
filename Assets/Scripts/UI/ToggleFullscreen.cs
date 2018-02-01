@@ -9,12 +9,21 @@ public class ToggleFullscreen : MonoBehaviour {
     bool enableFull = true;
     public Sprite OffSprite;
     public Sprite OnSprite;
+    public GameObject Background;
+    public GameObject Fullscreen;
 
 
     // Use this for initialization
     void Start () {
         Button btn = fullButton.GetComponent<Button> ();
         btn.onClick.AddListener(FullOnClick);
+        //NB: 02/01/2018
+        //checks if operating system allows fullscreen and removes the button if not
+        if (SystemInfo.operatingSystem.ToLower().Contains("ios") || SystemInfo.operatingSystem.ToLower().Contains("mac")) {
+	        Destroy(Background);
+	        Destroy(Fullscreen);
+    	}
+
     }
 
     // Update is called once per frame
