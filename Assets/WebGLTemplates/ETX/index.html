@@ -5,12 +5,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>%UNITY_WEB_NAME%</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
-	<script src="TemplateData/ucapisupportfiles.js"> </script>
+    <script src="TemplateData/ucapisupportfiles.js"> </script>
     <link rel="stylesheet" href="TemplateData/style.css">
     <script src="TemplateData/UnityProgress.js"></script>  
     <script src="%UNITY_WEBGL_LOADER_URL%"></script>
+    <script src="TemplateData/DetectWebGL.js"></script>
+    <!--NB: 11/02/2017-->
+    <!--Replaced default Unity compatibility check that returns an error
+      prompt for all mobile devices with custom script that only warns
+      users if there device doesn't support WebGL-->
+    <!--NB: 11/13/2017-->
+    <script src="TemplateData/checkOrientation.js"> </script>
+    <script src="Build/UnityLoader.js"></script>
+    <!--NB: 11/13/2017-->
+    <!--Added script to confirm landscape orientation before loading game instance-->
+    <script>checkOrientation();</script>
     <script>
-      var gameInstance = UnityLoader.instantiate("gameContainer", "%UNITY_WEBGL_BUILD_URL%", {onProgress: UnityProgress});
+      var gameInstance = UnityLoader.instantiate("gameContainer", "%UNITY_WEBGL_BUILD_URL%", {onProgress: UnityProgress, compatibilityCheck: DetectWebGL});
     </script>
   </head>
   <body>
