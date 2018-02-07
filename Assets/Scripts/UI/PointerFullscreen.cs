@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class PointerFullscreen : MonoBehaviour, IPointerDownHandler {
     public Sprite OffSprite;
     public Sprite OnSprite;
-    bool enableFull;
-   
+    bool enableFull = true;
+
     public void OnPointerDown(PointerEventData eventData){
+
         Screen.fullScreen = !Screen.fullScreen;
         if (enableFull)
         {

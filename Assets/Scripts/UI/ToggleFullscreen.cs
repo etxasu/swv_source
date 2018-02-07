@@ -13,20 +13,24 @@ public class ToggleFullscreen : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Button btn = fullButton.GetComponent<Button> ();
-        btn.onClick.AddListener(FullOnClick);
+       // Button btn = fullButton.GetComponent<Button> ();
+       // btn.onClick.AddListener(FullOnClick);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-
+    void Update () {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
+            if (hit)
+            {
+                Debug.Log("YOU HAVE HIT OBJECT COLLIDER: "+hit.collider.gameObject.name);
+            }
+        }
     }
-
-
-    /*
     void OnMouseDown(){
+        Debug.Log("MOUSE IS DOWN.");
 
             if (enableFull)
             {
@@ -63,13 +67,15 @@ public class ToggleFullscreen : MonoBehaviour {
                 }
             }
 
-    }*/
+    }
    
+    /*
    void FullOnClick(){
         if (enableFull) {
             Screen.SetResolution (Screen.width, Screen.height, true);
             //Screen.fullScreen = true;
             gameObject.GetComponent<Image> ().sprite = OffSprite;
+            Debug.Log("FULLSCREEN OFF");
             enableFull = false;
         } 
         else {
@@ -77,6 +83,9 @@ public class ToggleFullscreen : MonoBehaviour {
             if (Application.platform == RuntimePlatform.Android) {
                 Application.Quit ();
                 gameObject.GetComponent<Image>().sprite = OnSprite;
+                Debug.Log("FULLSCREEN ON");
+
+
                 enableFull = true;
 
 
@@ -85,9 +94,11 @@ public class ToggleFullscreen : MonoBehaviour {
             else {
                 Screen.SetResolution (Screen.width,Screen.height, false);
                 gameObject.GetComponent<Image>().sprite = OnSprite;
+                Debug.Log("FULLSCREEN ON");
+
                 enableFull = true;
 
             }
         }
-    }
+    }*/
 }
