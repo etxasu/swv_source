@@ -20,9 +20,10 @@ public class ToggleFullscreen : MonoBehaviour {
         if (SystemInfo.operatingSystem.ToLower().Contains("ios") || SystemInfo.operatingSystem.ToLower().Contains("mac")) {
             Destroy(Background);
             Destroy(Fullscreen);
-        }
-        Button btn = fullButton.GetComponent<Button> ();
-        btn.onClick.AddListener(FullOnClick);
+        } else {
+	        Button btn = fullButton.GetComponent<Button> ();
+	        btn.onClick.AddListener(FullOnClick);
+	    }
 
     }
 
