@@ -111,6 +111,11 @@ public class CloseUpCamera : MonoBehaviour
         {
             if (Fingers.WhatTouched() == null)
             {
+				//Myzoomslider.value min =.5 max =15
+				//Jake Hartman
+				xSpeed = (MyZoomSlider.value*-1f)+28f;
+				ySpeed = (MyZoomSlider.value*-1f)+28f;
+
                 x += Lean.LeanTouch.DragDelta.x * xSpeed * 0.02f;
                 y -= Lean.LeanTouch.DragDelta.y * ySpeed * 0.02f;
 

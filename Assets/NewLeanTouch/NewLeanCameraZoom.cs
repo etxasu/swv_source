@@ -1,5 +1,4 @@
 using UnityEngine;
-
 namespace NewLean.Touch
 {
 	// This script allows you to zoom a camera in and out based on the pinch gesture
@@ -10,6 +9,8 @@ namespace NewLean.Touch
         public GameObject AsessmentCamera;
 
         public GameObject MiniMapCamera;
+
+        public GameObject MyCloseUpCamera;
 
         [Tooltip("The camera that will be zoomed")]
 		public Camera Camera;
@@ -66,6 +67,7 @@ namespace NewLean.Touch
 
                 // Get script from assesment camera (which is default)
                 Zoomer ZoomerScript = (Zoomer)AsessmentCamera.GetComponent(typeof(Zoomer));
+                CloseUpCamera CloseUpCameraScript = (CloseUpCamera)MyCloseUpCamera.GetComponent(typeof(CloseUpCamera));
 
                 if (minimapZoom)
                 {
@@ -96,6 +98,11 @@ namespace NewLean.Touch
 
                 if (pinchRatio != prevZoom)
                 {
+                    //Calculate percentage of zoom
+					float ZoomPercent = (Zoom-ZoomMin)/(ZoomMax-ZoomMin);
+					float distanceMin = CloseUpCameraScript.distanceMin;
+					float distanceMax = CloseUpCameraScript.distanceMax;
+					CloseUpCameraScript.distance = Mathf.Clamp((ZoomPercent*(distanceMax-distanceMin)+distanceMin), distanceMin, distanceMax);
                     ZoomerScript.UpdateSSVCameraPosition(Zoom);
                 }
                 Zoom = ZoomerScript.getZoomValue();
