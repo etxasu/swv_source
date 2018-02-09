@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * KMJ: 02/08/18 - Fullscreen script that allows user to enter and exit fullscreen mode. 
+ * Fullscreen button image is swapped each time button is touched. Utilizes OnMouseDown Trigger.
+ */
 public class Clicke : MonoBehaviour {
     bool enableFull = true;
     public Sprite OffSprite;
@@ -13,7 +17,7 @@ public class Clicke : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
+    // KMJ: 02/03/18 Checks for collider hit and tells Unity to start OnMouseDown Trigger.
 	void Update () {
         if (Input.GetMouseButtonDown(0))
         {
@@ -31,6 +35,8 @@ public class Clicke : MonoBehaviour {
         }
 		
 	}
+
+    // KMJ: 02/03/18 Toggles fullscreen and image each time button is touched.
     public void OnMouseDown()
     {
         Screen.fullScreen = !Screen.fullScreen;
