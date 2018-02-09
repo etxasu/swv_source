@@ -9,30 +9,33 @@ public class ResizeTestObjectSource : MonoBehaviour {
 
 	public GameObject testObject;
 	public GameObject objectLabel;
+	public float labelVertDif = 4.2f;
+	public float testVertDif = 5.0f;
+	public float testHorDif = 7.0f;
 
 	// Use this for initialization
 	void Start () {
 		testObject = GameObject.Find("TestObjectSource");
-		rescale();
-		relocate();
-		moveLabel();
+		Rescale();
+		Relocate();
+		MoveLabel();
 	}
 		
 	//rescale the image to be easier to click
-	void rescale() {
+	void Rescale() {
 		testObject.transform.localScale += new Vector3(0.4f, 0.4f, 0.4f);
 	}
 
 	//move the image to not overlap with Minimap edge
-	void relocate() {
-		testObject.transform.position += Vector3.up * 5f;
-		testObject.transform.position -= Vector3.right * 7f;
+	void Relocate() {
+		testObject.transform.position += Vector3.up * testVertDif;
+		testObject.transform.position -= Vector3.right * testHorDif;
 	}
 
 	//moves the label to not overlap with Minimap edge
-	void moveLabel() {
+	void MoveLabel() {
 		objectLabel = testObject.transform.GetChild(4).gameObject;
-		objectLabel.transform.position += Vector3.up * 4.2f;
+		objectLabel.transform.position += Vector3.up * labelVertDif;
 	}
 
 	// Update is called once per frame
