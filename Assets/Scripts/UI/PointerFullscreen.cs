@@ -7,6 +7,7 @@ using UnityEngine.UI;
 /*
  * KMJ: 02/08/18 - Fullscreen script that allows user to enter and exit fullscreen mode. 
  * Fullscreen button image is swapped each time button is touched. Utilizes OnPointerDown Event.
+ * 
  */
 public class PointerFullscreen : MonoBehaviour, IPointerDownHandler {
     public Sprite OffSprite;
