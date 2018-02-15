@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class PointerFullscreen : MonoBehaviour, IPointerDownHandler {
     public Sprite OffSprite;
     public Sprite OnSprite;
-    bool enableFull = true;
+    bool enableFull = false;
 
     public void OnPointerDown(PointerEventData eventData){
 
