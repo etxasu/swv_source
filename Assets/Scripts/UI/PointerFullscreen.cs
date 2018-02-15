@@ -30,9 +30,14 @@ public class PointerFullscreen : MonoBehaviour, IPointerDownHandler {
     }
 
 	// Use this for initialization
-	//void Start () {
-		
-	//}
+	//NB: 02/15/2018
+    //checks if operating system allows fullscreen and removes the button if not
+	void Start () {
+		if (SystemInfo.operatingSystem.ToLower().Contains("ios") || SystemInfo.operatingSystem.ToLower().Contains("mac")) {
+            Destroy(GameObject.Find("Fullscreen"));
+            Destroy(GameObject.Find("Fullscreen/Background"));
+        }
+	}
 	
 	// Update is called once per frame
 	//void Update () {
