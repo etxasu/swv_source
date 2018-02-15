@@ -21,11 +21,13 @@ public class PointerFullscreen : MonoBehaviour, IPointerDownHandler {
         {
             gameObject.GetComponent<Image>().sprite = OffSprite;
             enableFull = false;
-
+            //Application.ExternalCall("SetFullscreen",1);
+ 
         }
         else{
             gameObject.GetComponent<Image>().sprite = OnSprite;
             enableFull = true;
+           // Application.ExternalCall("SetFullscreen", 0);
 
         }
     }
