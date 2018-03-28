@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>%UNITY_WEB_NAME%</title>
+    <title>swv_source</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <script src="TemplateData/ucapisupportfiles.js"> </script>
     <link rel="stylesheet" href="TemplateData/style.css">
     <script src="TemplateData/UnityProgress.js"></script>  
-    <script src="%UNITY_WEBGL_LOADER_URL%"></script>
+    <script src="Build/UnityLoader.js"></script>
     <script src="TemplateData/DetectWebGL.js"></script>
     <!--NB: 11/02/2017-->
     <!--Replaced default Unity compatibility check that returns an error
@@ -17,17 +17,23 @@
     <!--NB: 11/13/2017-->
     <script src="TemplateData/checkOrientation.js"> </script>
     <script src="Build/UnityLoader.js"></script>
+    <script src="TemplateData/fullscreen.js"></script>
     <!--NB: 11/13/2017-->
     <!--Added script to confirm landscape orientation before loading game instance-->
     <script>checkOrientation();</script>
     <script>
-      var gameInstance = UnityLoader.instantiate("gameContainer", "%UNITY_WEBGL_BUILD_URL%", {onProgress: UnityProgress, compatibilityCheck: DetectWebGL});
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/nmbruce.github.io.json", {onProgress: UnityProgress, compatibilityCheck: DetectWebGL});
     </script>
   </head>
   <body>
     <div class="webgl-content">
       <div id="gameContainer" style="width: 100%; height: 100%; position: absolute;"></div>
-      </div>
     </div>
+    <div class="fullscreen">
+      <form id="fullButton">
+          <input class="fullButton" type="button" id="fullButton" onclick='toggleFull()'>
+      </form>
+    </div>
+    <script>checkSupport();</script>
   </body>
 </html>

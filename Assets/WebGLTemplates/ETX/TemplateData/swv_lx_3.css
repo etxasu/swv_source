@@ -50,7 +50,7 @@ header {
 .headerContainer .wrapper .nameScoreButtonWrapper .optionsToggle {
     /*To do: fix width/height, border, look of button in general to match Mute
     and Report buttons.*/
-    background: url(https://nmbruce.github.io/SPR/Menu.png) no-repeat;
+    background: url(https://nmbruce.github.io/TemplateData/Menu.png) no-repeat;
     background-size: 100% 100%;
     right: 0;
     width: 8%;
