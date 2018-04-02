@@ -8,19 +8,19 @@ function toggleFull() {
 		if(frame.requestFullScreen) {
 			console.log("standardFull");
 			frame.requestFullScreen();
-			addExit();
+			//addExit();
 		} else if (frame.mozRequestFullscreen) {
 			console.log("mozFull");
 			frame.mozRequestFullscreen();
-			addExit();
+			//addExit();
 		} else if (frame.webkitRequestFullscreen) {
 			console.log("webkitFull");
 			frame.webkitRequestFullscreen();
-			addExit();
+			//addExit();
 		} else if (frame.msRequestFullscreen) {
 			console.log("msFull");
 			frame.msRequestFullscreen();
-			addExit();
+			//addExit();
 		} 
 	} else {
 		console.log("Attempting to exit fullscreen");

@@ -16,6 +16,12 @@ body { background-color: #000000; margin: 0px 0px 0px 0px;}
 .webgl-content .progress.Dark .empty {background-image: url('progressEmpty.Dark.png');}
 .webgl-content .progress.Dark .full {background-image: url('progressFull.Dark.png');}
 
+/*
+NB: 04/02/2018
+Removed references to exitFullButton
+*/
+
+/*
 .webgl-content .exitFullButton {
 	position: relative;
 	top: -100%;
@@ -27,6 +33,7 @@ body { background-color: #000000; margin: 0px 0px 0px 0px;}
     width: 50px;
     z-index: 20000;
 }
+*/
 
 .fullscreen {
 	position: absolute;
@@ -34,7 +41,7 @@ body { background-color: #000000; margin: 0px 0px 0px 0px;}
 	top: 0%;
 	z-index: 22000;
 	border: blue;
-	z-index: 2147483647;
+	z-index: 20000;
 }
 
 .fullscreen .fullButton {
