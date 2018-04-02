@@ -47,20 +47,69 @@ header {
 .headerContainer .wrapper .nameScoreButtonWrapper .name {
     font-weight: 0
 }
+/*
+    NB:04/02/2018
+    Adjust menu button to match other top ENV bar buttons as closely as possible
+*/
 .headerContainer .wrapper .nameScoreButtonWrapper .optionsToggle {
-    /*To do: fix width/height, border, look of button in general to match Mute
-    and Report buttons.*/
+    /*
     background: url(https://nmbruce.github.io/TemplateData/Menu.png) no-repeat;
     background-size: 100% 100%;
-    right: 0;
+    */
+    font-family: open_sans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    float: right;
     width: 8%;
-    height: 120%;
-    color: #3686ff;
-    border: none;
+    height: 100%;
+    color: black;
+    background-color: black; /*Background color overwritten by rel css file*/
+    border: 2px solid #1753b5;;
     outline: none;
-    position: absolute;
+    position: relative;
     z-index: 1000;
 }
+
+.headerContainer .wrapper .nameScoreButtonWrapper .optionsToggle::after {
+    /*
+    background: url(https://nmbruce.github.io/TemplateData/Menu.png) no-repeat;
+    background-size: 100% 100%;
+    */
+    /*To do: change text color to white*/
+    content: 'Menu';
+    text-indent: 0;
+ 	display: block;
+ 	color: white;
+  	line-height: 0;
+  	position: fixed;
+  	top: 2.75%;
+  	right: 2.5%;
+  	font-size: large;
+}
+
+/*
+* Specific style for landscape mobile
+*/
+@media only screen
+	and (max-device-width: 850px) 
+	and (orientation: landscape) {
+	.headerContainer .wrapper .nameScoreButtonWrapper .optionsToggle::after {
+    /*
+    background: url(https://nmbruce.github.io/TemplateData/Menu.png) no-repeat;
+    background-size: 100% 100%;
+    */
+    /*To do: change text color to white*/
+    content: 'Menu';
+    text-indent: 0;
+ 	display: block;
+ 	color: white;
+  	line-height: 0;
+  	position: fixed;
+  	top: 3%;
+  	right: 1.5%;
+  	font-size: large;
+}
+
+	}
+
 .icon-reorder {
     visibility: hidden;
 }
