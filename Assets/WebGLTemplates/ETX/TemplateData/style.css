@@ -34,23 +34,25 @@ Removed references to exitFullButton
     z-index: 20000;
 }
 */
-
+/*
+NB: 04/12/2018;
+Moved fullsceen button beneath menu button to avoid issues with other
+UI buttons overlapping with cache case and fullscreen button showing
+up in weird places on some Anrdoid devices
+*/
 .fullscreen {
 	position: absolute;
-	right: 10%;
-	top: 0%;
-	z-index: 22000;
+	right: 0%;
+	top: 10%;
 	border: blue;
-	z-index: 20000;
+	z-index: 999;
 }
 
 .fullscreen .fullButton {
-	top: 0%;
-	right: 10%;
 	background: url(https://nmbruce.github.io/TemplateData/full-screen-hi.png);
 	background-repeat: no-repeat;
     background-size: 50px 50px;
     height: 50px;
     width: 50px;
-    z-index: 200001;
+    z-index: 999;
 }

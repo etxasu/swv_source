@@ -114,6 +114,7 @@ header {
 }
 .headerContainer .optionsPanel {
     margin-top: 3px
+    z-index: 1000;
 }
 .headerContainer .optionsPanel .displayOptionsView {
     background-color: #fff;
