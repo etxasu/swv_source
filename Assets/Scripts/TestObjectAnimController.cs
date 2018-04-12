@@ -33,7 +33,7 @@ public class TestObjectAnimController : MonoBehaviour {
 			timer = 0f;
 		} else if (TestObjectSource.activeSelf && activateAnimation == true && timer > 3f && numFlashes <= 2) {
 			//Flash every 3 seconds for a total of 3 times
-			SSM_Flasher.TriggerFlash = true;
+			//SSM_Flasher.TriggerFlash = true;
 			numFlashes++;
 			timer = 0f;
 		}
