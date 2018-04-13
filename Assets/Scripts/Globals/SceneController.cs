@@ -584,7 +584,7 @@ public class SceneController : MonoBehaviour
 
     public void SaveCurrentData()
     {
-        //gameObject.GetComponent<SPR_LocalData>().WriteToSPR();
+        gameObject.GetComponent<SPR_LocalData>().WriteToSPR();
     }
 
     private IEnumerator DelayedSaveCurrentData()
