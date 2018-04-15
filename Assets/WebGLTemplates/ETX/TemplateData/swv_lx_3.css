@@ -1,0 +1,604 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+.skin-default {
+    background-color: #FF00EE;
+    font-family: 'Open Sans', sans-serif
+}
+.skin-default .mainView:before {
+    height: 0px;
+    background-color: #fff;
+    border-bottom: 3px solid #1c1c1c
+}
+header {
+    font-family: 'Open Sans', sans-serif !important
+}
+.headerContainer {
+    height: 0px;
+    z-index: 200;
+}
+.headerContainer .defaultView {
+    height: 100%;
+    width: 100%;
+}
+
+.headerContainer .lessonTitle {
+    position: absolute;
+    left: 0px;
+    color: #0066ff;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 0;
+    font-size: 0px
+}
+.headerContainer .wrapper {
+    float: none;
+    position: absolute;
+    height: 5%;
+    width: 100%;
+    right: 0%;
+}
+.headerContainer .wrapper .nameScoreButtonWrapper {
+    height: 120%;
+    width: 100%;
+}
+.headerContainer .wrapper .nameScoreButtonWrapper .name,
+.headerContainer .wrapper .nameScoreButtonWrapper .score {
+    margin-top: 0px;
+    color: #1c1c1c
+}
+.headerContainer .wrapper .nameScoreButtonWrapper .name {
+    font-weight: 0
+}
+/*
+    NB:04/02/2018
+    Adjust menu button to match other top ENV bar buttons as closely as possible
+*/
+.headerContainer .wrapper .nameScoreButtonWrapper .optionsToggle {
+    /*
+    background: url(https://nmbruce.github.io/TemplateData/Menu.png) no-repeat;
+    background-size: 100% 100%;
+    */
+    font-family: open_sans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    float: right;
+    width: 8%;
+    height: 100%;
+    color: black;
+    background-color: black !important; /*Background color overwritten by rel css file*/
+    border: 2px solid #1753b5;;
+    outline: none;
+    position: relative;
+    z-index: 1000;
+}
+
+.headerContainer .wrapper .nameScoreButtonWrapper .optionsToggle::after {
+    /*
+    background: url(https://nmbruce.github.io/TemplateData/Menu.png) no-repeat;
+    background-size: 100% 100%;
+    */
+    /*To do: change text color to white*/
+    content: 'Menu';
+    text-indent: 0;
+    display: block;
+    color: white;
+    line-height: 0;
+    position: fixed;
+    top: 2.75%;
+    right: 2.5%;
+    font-size: large;
+}
+
+/*
+* Specific style for landscape mobile
+*/
+@media only screen
+    and (max-device-width: 850px) 
+    and (orientation: landscape) {
+    .headerContainer .wrapper .nameScoreButtonWrapper .optionsToggle::after {
+    /*
+    background: url(https://nmbruce.github.io/TemplateData/Menu.png) no-repeat;
+    background-size: 100% 100%;
+    */
+    /*To do: change text color to white*/
+    content: 'Menu';
+    text-indent: 0;
+    display: block;
+    color: white;
+    line-height: 0;
+    position: fixed;
+    top: 3%;
+    right: 1.5%;
+    font-size: large;
+    }
+}
+
+.icon-reorder {
+    visibility: hidden;
+}
+.headerContainer .optionsPanel {
+    margin-top: 3px
+    z-index: 1000;
+}
+.headerContainer .optionsPanel .displayOptionsView {
+    background-color: #fff;
+    color: #1c1c1c;
+    font-family: 'Open Sans', sans-serif !important
+}
+.headerContainer .optionsPanel .displayOptionsView button {
+    font-family: open_sans, "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+.headerContainer .optionsPanel .displayOptionsView .navigationOption {
+    display: none
+}
+.headerContainer .optionsPanel .displayOptionsView .option {
+    color: #1c1c1c !important
+}
+.headerContainer .optionsPanel .displayOptionsView .option .state .on,
+.headerContainer .optionsPanel .displayOptionsView .option .state .off {
+    background-color: #f1f1ef
+}
+.headerContainer .optionsPanel .displayOptionsView .option .state .on .left,
+.headerContainer .optionsPanel .displayOptionsView .option .state .off .right {
+    background-color: #1c1c1c;
+    color: #fff
+}
+.headerContainer .optionsPanel .displayOptionsView .updateDetailsOption .updateDetailsBtn,
+.headerContainer .optionsPanel .displayOptionsView .restartOption .restartBtn {
+    background-color: #1c1c1c;
+    color: #fff
+}
+.headerContainer .optionsPanel .displayOptionsView .logoutOption .logoutBtn {
+    background-color: #555;
+    color: #fff
+}
+.navigationContainer {
+    top: 0px;
+    width: auto;
+    position: absolute !important
+}
+aside {
+    width: 0px;
+    background: none;
+    border: nones
+}
+aside .title {
+    display: none
+}
+aside .history {
+    width: 0px;
+    background-color: #fff;
+    top: 0px;
+    z-index: 1000
+}
+aside .history:before {
+    content: 'Question History';
+    display: block;
+    position: relative;
+    padding-left: 0px;
+    border-bottom: 3px solid #f1f1ef;
+    background: none;
+    width: 0px;
+    padding: 0px 0px 0px 0px;
+    margin-left: 0px;
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 600
+}
+aside .history .history-element {
+    height: 0px;
+    border: none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-left: 0px;
+    color: #888;
+    font-size: 12px;
+    border-bottom: 1px solid #e8eaeb;
+    position: relative;
+    width: 0px;
+    font-family: 'Open Sans', sans-serif !important
+}
+aside .history .history-element::after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%
+}
+aside .history .history-element:hover {
+    color: #1c1c1c
+}
+aside .history .history-element.history-element-selected {
+    color: #1c1c1c;
+    background: #fff
+}
+aside .navbar-resize-dots {
+    display: none
+}
+aside .navigationToggle {
+    background-color: #f1f1ef
+}
+aside.minimized {
+    height: 0px;
+    width: 0px;
+    display: block;
+    background-image: none;
+    overflow: hidden
+}
+aside.minimized .history {
+    z-index: 0
+}
+aside.minimized .navigationToggle {
+    background-color: transparent
+}
+aside .navigationToggle,
+aside.minimized .navigationToggle {
+    display: block !important;
+    width: 0px;
+    height: 0px;
+    border: none !important;
+    /*border-right: solid 1px #f1f1ef !important*/
+}
+aside .navigationToggle::before,
+aside.minimized .navigationToggle::before {
+    content: '';
+    font-size: 14px;
+    display: inline-block;
+    z-index: 21000;
+    width: 100%;
+    right: 0;
+    position: relative;
+    color: #fff !important;
+    text-align: center;
+    text-transform: uppercase;
+    background: url('https://d1rpkia8qpfj4t.cloudfront.net/repo/styles/templates/magnum/img/history.png') 14px center no-repeat;
+    height: 0px
+}
+aside .navigationToggle:focus,
+aside.minimized .navigationToggle:focus {
+    outline: none
+}
+#stage-stage .content input[type='radio'],
+#stage-stage .content input[type='checkbox'] {
+    opacity: 0
+}
+#stage-stage .content input[type='radio']+label,
+#stage-stage .content input[type='checkbox']+label {
+    margin: 0;
+    clear: none;
+    cursor: pointer;
+    background: url('https://d1rpkia8qpfj4t.cloudfront.net/repo/styles/templates/magnum/img/checkbox-normal.png') left 1px no-repeat;
+    background-size: 15px;
+    vertical-align: top;
+    line-height: 148%!important
+}
+#stage-stage .content input[type='radio']+label *,
+#stage-stage .content input[type='checkbox']+label * {
+    line-height: 148%!important;
+    vertical-align: top
+}
+#stage-stage .content input[type='radio']+label sub,
+#stage-stage .content input[type='checkbox']+label sub {
+    padding-top: 0.8em !important
+}
+#stage-stage .content input[type='radio']+label sup,
+#stage-stage .content input[type='checkbox']+label sup {
+    padding-top: 0.2em !important
+}
+#stage-stage .content input[type='radio']:checked+label,
+#stage-stage .content input[type='checkbox']:checked+label {
+    background-image: url('https://d1rpkia8qpfj4t.cloudfront.net/repo/styles/templates/magnum/img/checkbox-active.png')
+}
+
+.checkContainer {   
+    position: absolute !important;
+    width: 0%;
+    height: 0%;
+}
+
+.checkContainer .buttonContainer {
+    top: 0px;
+    right: 0;
+    width: 0px;
+    height: 0px
+}
+.checkContainer .buttonContainer .checkBtn {
+    line-height: 0px;
+    padding: 0;
+    min-width: 0px;
+    background: #1F262F !important
+}
+
+.checkContainer .buttonContainer .checkBtn:hover {
+    background: #404E60FF !important
+}
+
+.checkContainer .buttonContainer .checkBtn,
+.checkContainer .buttonContainer .closeFeedbackBtn {
+    font-size: 0px;
+    text-transform: uppercase;
+    outline: 0;
+    padding-bottom: 0;
+    width: 0px;
+    height: 0px;
+    min-width: 0px;
+    font-family: 'Open Sans', sans-serif !important
+}
+.checkContainer .buttonContainer .correctFeedback {
+    width: 0px;
+    line-height: 0px;
+    padding: 0;
+    min-width: 0px;
+    background: #47be9e !important
+}
+.checkContainer .buttonContainer::after {
+    display: none
+}
+.feedbackContainer .bottomContainer {
+    bottom: 0px;
+    right: -0px
+}
+.feedbackContainer .bottomContainer #stage-feedback {
+    box-shadow: none
+}
+.feedbackContainer .bottomContainer #stage-feedback .content {
+    background: #ccff22;
+    padding: 0px 0 0px 0px;
+    min-height: 0px !important
+}
+.feedbackContainer .bottomContainer .toggleFeedbackBtn {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 0px;
+    height: 0px;
+    background: #f7ff7d;
+    outline: 0;
+    border: 1px solid #f1f1ef
+}
+.feedbackContainer .bottomContainer .toggleFeedbackBtn .icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0px;
+    width: 0px;
+    height: 0px;
+    background: url("https://d1rpkia8qpfj4t.cloudfront.net/repo/styles/templates/magnum/img/feedback-arrow.png") no-repeat 0 0;
+    margin: auto
+}
+.feedbackContainer .bottomContainer .toggleFeedbackBtn::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 0%;
+    height: 0px;
+    padding-left: 0px;
+    font-size: 0px;
+    color: #1c1c1c;
+    text-align: center;
+    line-height: 0px;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif !important
+}
+.feedbackContainer .bottomContainer.minimized .toggleFeedbackBtn .icon {
+    background-position: 0px
+}
+.feedbackContainer #stage-feedback {
+    border: 1px solid #f1f1ef;
+    border-bottom: none
+}
+.feedbackContainer #stage-feedback p,
+.feedbackContainer #stage-feedback span,
+.feedbackContainer #stage-feedback div,
+.feedbackContainer #stage-feedback strong {
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 300;
+    font-size: 14px!important;
+    line-height: 1.3em !important
+}
+#stage-stage .content {
+    border: none !important
+}
+#stage-stage .content p,
+#stage-stage .content span,
+#stage-stage .content div,
+#stage-stage .content strong,
+#stage-stage .content option,
+#stage-stage .content label {
+    font-family: 'Open Sans', sans-serif !important;
+    line-height: 130% !important
+}
+.skin-default .messageBoxView .modal-footer .btn {
+    background-color: #555
+}
+.skin-default .messageBoxView .modal-footer:first-child {
+    background-color: #1c1c1c
+}
+.cover .headerContainer .lessonTitle {
+    display: none
+}
+.cover .checkContainer {
+    width: 0px !important
+}
+.cover .checkContainer .buttonContainer {
+    top: 0px;
+    width: 0px
+}
+.cover .checkContainer .buttonContainer .spricon-ajax-loader {
+    left: 0px;
+    right: 0;
+    margin: auto
+}
+.cover .content {
+    background-color: transparent !important
+}
+.poll-widget {
+    margin-top: -1em !important;
+    background-color: transparent!important
+}
+.checkContainer {
+    z-index: 1004
+}
+.mainView .feedbackContainer .bottomContainer {
+    top: -0px;
+    right: 0px;
+}
+
+/*
+* Specific style for landscape mobile to remove resizing bug
+*/
+
+.mainView .lessonView {
+    width: 100% !important;
+    height: 100% !important;
+    position: static !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.mainView .feedbackContainer .bottomContainer .toggleFeedbackBtn {
+    width: 0px;
+    height: 0px;
+    bottom: 0px;
+    right: 0px
+}
+.mainView .feedbackCo1ntainer #stage-feedback {
+    border-bottom: 1px solid #e1e1e1
+}
+.skin-default {
+    background-color: #000
+}
+#stage-stage .content {
+    border: 1px solid #000!important
+}
+.feedbackContainer .bottomContainer {
+    top: -0px;
+}
+
+.feedbackContainer .bottomContainer #stage-feedback {
+    border-color: #e1e1e1
+}
+.feedbackContainer .bottomContainer #stage-feedback .content {
+    background: #e1e1e1;
+}
+.headerContainer {
+    display: block
+}
+
+.simIFrame .stageContainer {
+    width: 99vw !important;
+    height: 99vh !important;
+    left: 0 !important;
+    top: -10px !important
+}
+
+
+.simIFrame .stageContainer .content {
+     width: 99vw !important;
+    height: 99vh !important;
+    left: 0 !important;
+    top: -10px !important
+    
+}   
+.simIFrame .stageContainer .content .instructions 
+{
+    top: 60% !important;
+    left: 40% !important;
+}
+
+.simIFrame .stageContainer .content .guide 
+{
+    bottom: 10% !important;
+    right: 10% !important;
+}
+
+/*
+* Specific style for landscape mobile to remove resizing bug
+*/
+.simIFrame .stageContainer #stage-stage .content {
+position: fixed !important;
+top: 100% !important;
+left: 100% !important;
+margin: 0px 0 0 -0px !important;
+box-shadow: none !important
+}
+
+.simIFrame .checkContainer {
+    position: absolute !important;
+    height: 0px !important;
+    width: 0px !important;
+    /*bottom: 133px !important;*/
+}
+
+.simIFrame .checkContainer .buttonContainer {
+    height: 0px !important;
+    width: 0px !important;
+    /*bottom: 133px !important;*/
+}
+
+.simIFrame .checkContainer .buttonContainer .checkBtn {
+    height: 0px !important;
+    width: 0px !important;
+    /*bottom: 133px !important;*/
+}
+
+.simIFrame .feedbackContainer {
+    position: absolute;
+    width: 0% !important;
+    height: 0% !important;
+    bottom: 0px !important;
+    left: 0px!important;
+}
+
+.simIFrame iframe#simIFrame {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/*
+* Specific style for landscape mobile to remove resizing bug
+*/
+
+.simIFrame iframe#simIFrame {
+position: fixed !important;
+width: 100% !important;
+height: 100% !important;
+top: 0 !important;
+bottom: 0 !important;
+left: 0 !important;
+right: 0 !important;
+}
+
+.simIFrame .centerStage {
+  /*position: fixed !important;*/
+  top: 50% !important;
+  left: 50% !important; 
+}
+
+.simIFrame .anchored {
+  position: inherit !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*
+* Specific style for landscape mobile to remove resizing bug
+*/
+
+.simIFrame .anchored {
+  position: inherit !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+header .optionsPanel .option.logoutOption {
+    display: none!important
+}
+header .score {
+    display: none!important
+}
+header .name {
+    opacity: 0!important;
+    min-width: 0px!important
+}
+
+}
