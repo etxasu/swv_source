@@ -13,12 +13,16 @@ public class ResizeTestObjectSource : MonoBehaviour {
 	public float testVertDif = 5.0f;
 	public float testHorDif = 7.0f;
 
+	//NB: 04/11/2018
+	//Changed to only resize to larger for mobile
 	// Use this for initialization
 	void Start () {
-		testObject = GameObject.Find("TestObjectSource");
-		Rescale();
-		Relocate();
-		MoveLabel();
+		if (SystemInfo.operatingSystem.ToLower().Contains("ios") || SystemInfo.operatingSystem.ToLower().Contains("android")) {
+			testObject = GameObject.Find("TestObjectSource");
+			Rescale();
+			Relocate();
+			MoveLabel();
+		}
 	}
 		
 	//rescale the image to be easier to click
