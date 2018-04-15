@@ -25,6 +25,7 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     public string TestObjectPrefix;
     private Rect DragSurfaceRect;
     public bool ExposeCAPI;
+    public GameObject AnimatedTestObject;
 
     public GameObject[] ZoneBoundaryObjects;
     public GameObject[] TutorialZoneBoundaryObjects;
@@ -40,11 +41,18 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
     void Start()
     {
         _SceneController = MySceneController.GetComponent<SceneController>();
+        AnimatedTestObject = GameObject.Find("AnimatedTestObject");
     }
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-        if(_icons.Count > 0)
+        //Destroy animation object
+        if(AnimatedTestObject != null)
+        {
+            Destroy(AnimatedTestObject);
+        }
+
+        if (_icons.Count > 0)
         {
             CleanUpIcons();
         }
