@@ -58,14 +58,20 @@ public class SPR_LocalData : MonoBehaviour
 	void Update ()
     {
         // Clunky because we want this to run on the second loop, not first.
-	    if(UpdateLoops == 0)
+	    if(UpdateLoops <10)
         {
             UpdateLoops++;
         }
-        else if(UpdateLoops == 1)
+        else if(UpdateLoops == 10)
         {
-            CheckSaveState();
-            UpdateLoops = 2;
+        	Debug.Log("ResetData: " + MySceneController.ResetData);
+            //NB: 04/19/2018
+            //check if data was supposed to be reset and only call CheckSaveState() if it hasn't
+            if(!MySceneController.ResetData)
+            {
+                CheckSaveState();
+            }
+            UpdateLoops = 11;
         }
 
 	}
@@ -127,6 +133,7 @@ public class SPR_LocalData : MonoBehaviour
         _value = _value + MySceneController.KBOGroup.transform.GetChild(0).GetChild(3).GetComponent<MeshRenderer>().enabled.ToString() + ",";
 
         // Write current camera mode, 0 1 or 2
+        Debug.Log("Saving Camera mode: " + MySceneController.CurrentCameraMode.ToString());
         _value = _value + MySceneController.CurrentCameraMode.ToString() + ",";
 
         // Write the name of the current target. This should never be null, as there are null-catch cases that will set it to Sun instead.
@@ -141,7 +148,9 @@ public class SPR_LocalData : MonoBehaviour
 
     public void WipeSaveData()
     {
-        Application.ExternalCall("storeUnityData", SimID, KeyName, "0,0,0,0,False,False,False,");
+    	Debug.Log("WipeSaveData");
+        Application.ExternalCall("storeUnityData", SimID, KeyName, "0,0,0,0,false,false,false,0,Sun");
+        WipeAllWorlds();
     }
 
     public void CheckSaveState()
@@ -181,6 +190,8 @@ public class SPR_LocalData : MonoBehaviour
 
         int _CameraMode = Int32.Parse(_values[7]);
 
+
+        Debug.Log("Loading Camera Mode: " + _CameraMode.ToString());
         switch (_CameraMode)
         {
             case 0:
@@ -245,8 +256,24 @@ public class SPR_LocalData : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator DelayedUpdateFoundWorlds(string _obj)
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        if(!MySceneController.ResetData)
+        {
+        	UpdateFoundWorlds(_obj);
+        }
+
+        MySceneController.SetResetData(false);
+
+        yield return null;
+
+    }
+
     public void UpdateFoundWorlds(string _obj)
     {
+        Debug.Log("FoundWorlds: " + _obj);
         FoundObjectBit = _obj;
         ReadFromSPR(FoundObjectBit);
     }
@@ -283,6 +310,43 @@ public class SPR_LocalData : MonoBehaviour
         LoadUpWorlds(NEOGroup.transform, 1);
         LoadUpWorlds(MABGroup.transform, 2);
         LoadUpWorlds(KBOGroup.transform, 3);
+    }
+
+    //NB: 04/18/2018
+    // Use this method to wipe a worldset from the scene
+    private void WipeWorldSet(Transform _WorldSet, int _index)
+    {
+    	Debug.Log("WipeWorldSet");
+        foreach(Transform _child in _WorldSet)
+        {
+            Debug.Log("Wiping " + _child.name);
+            //Debug.Log(LocatedBits[_index]);
+            Debug.Log(_child.name + " now wiping");
+            _child.GetChild(3).GetComponent<SelectOrbitalObject>().AddOrbitalPath = false;
+            _child.GetChild(3).GetComponent<SelectOrbitalObject>().AddNamePlate = false;
+            _child.GetChild(3).GetComponent<SelectOrbitalObject>().WipeOrbitalPath = true;
+            _child.GetChild(3).GetComponent<SelectOrbitalObject>().Studied = false;
+            Capi.set(_child.name + ".CacheFound", _child.GetChild(3).GetComponent<SelectOrbitalObject>().Studied);
+        }
+    }
+
+    private void WipeAllWorlds()
+    {
+    	MySceneController.GetComponent<UIController>().RemoveInfoPlates();
+    	Debug.Log("WipeAllWorlds");
+        WipeWorldSet(PlanetGroup.transform, 0);
+        WipeWorldSet(NEOGroup.transform, 1);
+        WipeWorldSet(MABGroup.transform, 2);
+        WipeWorldSet(KBOGroup.transform, 3);
+    }
+
+    private IEnumerator DelayedWipeAllWorlds() {
+    	Debug.Log("DelayedWipeAllWorlds");
+        yield return new WaitForSeconds(2.5f);
+
+        WipeAllWorlds();
+
+        yield return null;
     }
 }
 

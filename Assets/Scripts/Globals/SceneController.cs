@@ -104,6 +104,8 @@ public class SceneController : MonoBehaviour
     public bool ShowKBOAssessmentLines;
     public float NextScreenDelay = 0.0f;
     public bool TriggerDelayedNext = false;
+    public bool ResetData = false;
+    private bool _DataHasBeenReset = false;
 
     [Header("Small World Group Properties")]
     public GameObject KBOGroup;
@@ -386,6 +388,15 @@ public class SceneController : MonoBehaviour
             Capi.set("System.Trigger Delayed Next", TriggerDelayedNext);
         }
         //SwitchSkybox();
+        //NB:04/15/2018
+        //call WipeSaveData() if ResetData is true (should only be true at the first task)
+        if (ResetData && !_DataHasBeenReset)
+        {
+            Debug.Log("In Scene Controller, ResetData: " + ResetData);
+            Debug.Log("Wiping Data");
+            _DataHasBeenReset = true;
+            gameObject.GetComponent<SPR_LocalData>().WipeSaveData();
+        }
     }
 
     private void ReparentOrbitalLines()
@@ -584,7 +595,7 @@ public class SceneController : MonoBehaviour
 
     public void SaveCurrentData()
     {
-        //gameObject.GetComponent<SPR_LocalData>().WriteToSPR();
+        gameObject.GetComponent<SPR_LocalData>().WriteToSPR();
     }
 
     private IEnumerator DelayedSaveCurrentData()
@@ -662,6 +673,10 @@ public class SceneController : MonoBehaviour
 		Capi.expose<float>("UI.Minimap.SetCurrentZoneWidth", () => { return SetCurrentZoneWidth; }, (value) => { return SetCurrentZoneWidth = value; });
 		Capi.expose<float>("UI.Minimap.SetCurrentZoneMidpoint", () => { return SetCurrentZoneMidpoint; }, (value) => { return SetCurrentZoneMidpoint = value; });
 
+        //NB:04/15/2018
+        //capi expose for resetdata
+        Capi.expose<bool>("Globals.ResetData", () => { return ResetData; }, (value) => { return ResetData = value; });
+
     }
 
     public float UpdateWorldSpeedAndSlider(float _speed)
@@ -713,6 +728,14 @@ public class SceneController : MonoBehaviour
     public void TestGetData()
     {
         Application.ExternalCall("getUnityData", "testId", "testKey");
+    }
+    //NB:04/20/2018
+    //Method to call from SPR_Local_Data after find ResetData was true
+    public void SetResetData(bool reset)
+    {
+        Debug.Log("Setting ResetData to " + reset);
+        ResetData = reset;
+        Capi.set("Globals.ResetData", ResetData);
     }
 
     //public void DisableMinimaps()
