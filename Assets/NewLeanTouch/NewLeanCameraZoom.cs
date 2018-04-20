@@ -57,7 +57,7 @@ namespace NewLean.Touch
                 // Check position of figures
                 for (var i = 0; i < fingers.Count; i++)
                 {
-                    if (!minimapZoom)
+                    if (!minimapZoom && !MyCloseUpCamera.GetComponent<Camera>().enabled)
                     {
                         var checkFinger = fingers[i];
                         if (checkFinger.ScreenPosition.x > 740 && checkFinger.ScreenPosition.y < 225)
