@@ -30,6 +30,7 @@ public class SelectOrbitalObject : MonoBehaviour
     public bool AddNamePlate = false;
     private bool AlreadyHaveNameplate = false;
     public bool AddOrbitalPath = false;
+    public bool WipeOrbitalPath = false;
 
 
     [Header("Instantiated Object Properties")]
@@ -88,6 +89,14 @@ public class SelectOrbitalObject : MonoBehaviour
         }
     }
 
+    //NB:04/20/2018
+    public void AutoRemoveNamePlate()
+    {
+        AlreadyHaveNameplate = false;
+        MySceneController.GetComponent<UIController>().RemoveInfoPlates();
+
+    }
+
     public void CreateOrbitalPath()
     {
         //First, check to see if the path object already exists.
@@ -139,6 +148,22 @@ public class SelectOrbitalObject : MonoBehaviour
         }
     }
 
+    //NB:04/20/2018
+    public void RemoveOrbitalPath()
+    {  
+        //First, check to see if the path object already exists.
+        if (OrbitalPathsParent.transform.Find(gameObject.transform.parent.name + " Orbital Path") == null)
+        {
+            Debug.Log("Orbital path doens't exist for " + gameObject.transform.parent.name);
+            // do nothing, derp derp derp
+        }
+        else
+        {
+            Debug.Log("Removing Orbital path for " + gameObject.transform.parent.name);
+            GameObject MyOrbitalPath = null;
+        }
+    }
+
     void Update()
     {
         if(FirstUpdate)
@@ -160,6 +185,12 @@ public class SelectOrbitalObject : MonoBehaviour
             CreateOrbitalPath();
             AddOrbitalPath = !AddOrbitalPath;
             Capi.set(transform.parent.name + ".AddOrbitalPath", AddOrbitalPath);
+        }
+        //NB:04/20/2018
+        if(WipeOrbitalPath)
+        {
+            RemoveOrbitalPath();
+            WipeOrbitalPath = false;
         }
 
         ScaleByDistance();

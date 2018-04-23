@@ -72,6 +72,36 @@ public class UIController : MonoBehaviour
         _newPlate.transform.GetChild(0).GetComponent<Outline>().effectColor = _color;
         _newPlate.transform.GetChild(0).GetComponent<Text>().text = "" + _go.name.ToUpper() + "\n[ " + _go.GetComponent<OrbitalMovement>().MyObjectType.ToString().ToUpper() + " ]";
     }
+
+    //NB:04/20/2018
+    //Explicitly remove nameplate from an object
+    public void RemoveInfoPlates()
+    {
+        Debug.Log("Remove name plates");
+        var _objects = FindObjectsOfType<OrbitalNameplate>();
+
+        foreach (OrbitalNameplate _namePlate in _objects)
+        {
+            if(!_namePlate.MyTarget.name.Contains("Test"))
+            {
+                Debug.Log("Removing name plate for " + _namePlate.MyTarget.name);
+                Destroy(_namePlate);
+            }
+        }
+    }
+    //NB:04/20/2018
+    //Remove orbital paths of any objects in scene
+    public void RemoveOrbitalPaths()
+    {
+        Debug.Log("Remove Orbital Paths");
+        var _objects = FindObjectsOfType<OrbitalPathRenderer>();
+
+        foreach (OrbitalPathRenderer _path in _objects)
+        {
+           Destroy(_path);
+        }
+    }
+
     private void ExposeCapi()
     {
         Capi.expose<string>("UI.Lesson Title.Text", () => { return LessonLabel.text; }, (value) => { return LessonLabel.text = value; });

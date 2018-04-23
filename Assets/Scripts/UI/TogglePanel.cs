@@ -126,6 +126,7 @@ public class TogglePanel : MonoBehaviour
         UIFader.transform.GetChild(0).gameObject.SetActive(false);
         SwapCamera(_CameraToSwap, _tgos);
         FadeIn();
+        MySceneController.SaveDataRightNow = true;
         yield return null;
     }
 
