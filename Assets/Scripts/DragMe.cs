@@ -50,6 +50,7 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         if(AnimatedTestObject != null)
         {
             Destroy(AnimatedTestObject);
+            AnimatedTestObject = null;
         }
 
         if (_icons.Count > 0)
